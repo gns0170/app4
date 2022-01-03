@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { Alert, Button, View } from 'react-native';
 import Styled from 'styled-components/native';
-import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerScreenProps } from '@react-navigation/drawer';
+import { DrawerNavigationState, NavigationContainer, ParamListBase } from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator,BottomTabScreenProps } from '@react-navigation/bottom-tabs';
@@ -38,7 +38,7 @@ function HomeStackNavi({navigation}:DrawerProps){
       <Button
       title="Test"
       color="FFF"
-      onPress={() => navigation.openDrawer()}
+      onPress={() => navigation.toggleDrawer()}
       />
       <Button
       title="Test"
@@ -65,16 +65,51 @@ function BottomNavi(){
   <Bottom.Navigator
   screenOptions={{
     headerShown: false
-  }}>
+  }}
+  >
     <Bottom.Screen name="Home" component={HomeStackNavi} />
     <Bottom.Screen name="Test" component={TestStackNavi} />
   </Bottom.Navigator>
   );
 }
 
+const showAlert = () =>
+  Alert.alert(
+    "Alert Title",
+    "My Alert Msg",
+    [
+      {
+        text: "Cancel",
+        onPress: () => Alert.alert("Cancel Pressed"),
+        style: "cancel",
+      },
+    ],
+    {
+      cancelable: true,
+      onDismiss: () =>
+        Alert.alert(
+          "This alert was dismissed by tapping outside of the alert dialog."
+        ),
+    }
+  )
+interface Props{
+};
+function CustomDrawerContent({...props}:Props){
+  return (
+    <DrawerContentScrollView {...props}>
+      <Button
+      title="Test"
+      color="FFF"/>
+      <DrawerItemList {...props} />
+      <DrawerItem label="To Meet Us" onPress={()=> showAlert()}/>
+    </DrawerContentScrollView>
+  );
+}
+
 function DrawerNavi(){
   return(
-    <Drawer.Navigator screenOptions={{headerShown: false}}>
+    <Drawer.Navigator screenOptions={{headerShown: false}} 
+    drawerContent={(props)=><CustomDrawerContent {...props}/>}>
       <Drawer.Screen name="Main" component={BottomNavi} />
       <Drawer.Screen name="Options" component={Options} />
     </Drawer.Navigator>
