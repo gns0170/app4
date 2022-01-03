@@ -19,9 +19,9 @@ const Bottom = createBottomTabNavigator();
 type Props = DrawerScreenProps<DrawerParamList,"Options">
 const Options = ({}: Props) => {
    return(
-       <Bottom.Navigator>
+       <Container>
            <Text>Options!</Text>
-       </Bottom.Navigator>
+        </Container>
    );
 }
  

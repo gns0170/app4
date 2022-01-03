@@ -4,6 +4,7 @@ import Button from '~/Components/Button'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
 const Container = Styled.View`
     width: 100%;
     height: 100%;
@@ -20,7 +21,12 @@ const Btn = Styled.Button``;
 const Text = Styled.Text`
 font-size: 30px;
 `;
-type Props = NativeStackScreenProps<StackParamList_Home, 'Home'>;
+type StackProps = NativeStackScreenProps<StackParamList_Home, 'Home'>;
+type DrawerProps = DrawerScreenProps<DrawerParamList, "Main">;
+type Props = CompositeScreenProps<
+    StackProps,
+    DrawerProps
+>
 const Home = ({navigation}: Props) => {
    return(
        <Container>
@@ -32,6 +38,9 @@ const Home = ({navigation}: Props) => {
             <Button
             title="Go to Details 2"
             onPress={() => navigation.push('HomeDetail2')} />
+            <Button
+            title="Drawer"
+            onPress={() => navigation.openDrawer()} />
         </Container1>
        </Container>
    );
