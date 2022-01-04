@@ -1,10 +1,10 @@
 type StackParamList_Home ={
-    Home: undefined;
+    HomeMain: undefined;
     HomeDetail1: undefined;
     HomeDetail2: undefined;
 }
 type StackParamList_Test ={
-    Test: undefined;
+    TestMain: undefined;
     TestDetail1: undefined;
     TestDetail2: undefined;
 }

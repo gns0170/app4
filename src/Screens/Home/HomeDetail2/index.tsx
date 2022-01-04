@@ -28,7 +28,7 @@ const HomeDetail2 = ({navigation}: Props) => {
            <Container1>
            <Button
             title="Go to Home"
-            onPress={() => navigation.navigate('Home')} />
+            onPress={() => navigation.navigate('HomeMain')} />
             <Button
             title="Go to Details 1"
             onPress={() => navigation.navigate('HomeDetail1')} />
